@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	file \
 	gettext \
 	git \
+    nodejs \
+    npm \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
@@ -95,3 +97,7 @@ RUN set -eux; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
 	chmod +x bin/console; sync;
+
+RUN npm install
+RUN npm run watch
+RUN npm run dev-server
