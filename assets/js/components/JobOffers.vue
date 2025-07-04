@@ -17,7 +17,6 @@ onMounted(async () => {
 async function fetchJobs() {
     const response = await axios.get(`/api/jobs?page=${currentPage.value}&limit=${perPage.value}`);
     jobs.value = response.data.payload;
-    console.log(jobs.value);
 }
 </script>
 

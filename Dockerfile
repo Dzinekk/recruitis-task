@@ -99,5 +99,3 @@ RUN set -eux; \
 	chmod +x bin/console; sync;
 
 RUN npm install
-RUN npm run watch
-RUN npm run dev-server

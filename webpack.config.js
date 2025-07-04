@@ -25,8 +25,12 @@ Encore
     .enableVueLoader()
     .addEntry('homepage', './assets/js/home.ts')
     .enablePostCssLoader()
+    .configureWatchOptions(watchOptions => {
+      watchOptions.poll = 1000;
+      watchOptions.ignored = /node_modules/;
+    })
 
-    // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
+  // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
     // will require an extra script tag for runtime.js
