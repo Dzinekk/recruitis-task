@@ -15,24 +15,26 @@
         "postcss": "^8.5.6",
         "prettier": "^3.6.2",
         "regenerator-runtime": "^0.13.9",
-        "tailwindcss": "^4.1.11",
+        "tailwindcss": "^3.4.17",
         "typescript-eslint": "^8.35.1",
         "vue": "^3.5.17",
         "vue-loader": "^17.4.2",
         "webpack": "^5.74.0",
         "webpack-cli": "^5.1.0",
-        "webpack-dev-server": "^5.2.2"
+        "webpack-dev-server": "^5.2.2",
+        "webpack-notifier": "^1.15.0"
     },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
+        "dev-server": "encore dev-server --hot",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@tailwindcss/postcss": "^4.1.11",
+        "@formkit/themes": "^1.6.9",
+        "@formkit/vue": "^1.6.9",
         "axios": "^1.10.0",
         "postcss-loader": "^8.1.1"
     }

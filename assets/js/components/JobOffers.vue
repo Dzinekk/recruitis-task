@@ -7,6 +7,7 @@ const currentPage = ref(1);
 const perPage = ref(10);
 const loading = ref(false);
 const jobs = ref([]);
+const error = ref(null);
 
 onMounted(async () => {
     loading.value = true;
@@ -15,14 +16,21 @@ onMounted(async () => {
 });
 
 async function fetchJobs() {
-    const response = await axios.get(`/api/jobs?page=${currentPage.value}&limit=${perPage.value}`);
-    jobs.value = response.data.payload;
+    error.value = null;
+    try {
+        const response = await axios.get(`/api/jobs?page=${currentPage.value}&limit=${perPage.value}`);
+        jobs.value = response.data;
+    } catch (e) {
+        error.value = `Chyba při načítání nabídek práce: ${e.response.data.message || e.message}`;
+    }
 }
 </script>
 
 <template>
-<div class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8" v-if="!loading">
-    <div v-for="job in jobs" class="flex flex-col gap-4 p-4 border border-gray-300 rounded-lg mb-4" :key="job.job_id">
+<div class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8" v-if="!loading && !error">
+    <a v-for="job in jobs" :href="`/${job.job_id}`"
+         class="flex flex-col gap-4 p-4 border border-gray-300 rounded-lg mb-4 hover:bg-gray-800 cursor-pointer"
+         :key="job.job_id">
         <h3 class="text-2xl">{{ job.title }}</h3>
 
         <div v-if="job.addresses && job.addresses.length">
@@ -33,9 +41,12 @@ async function fetchJobs() {
         </div>
 
         <div class="mb-1">Typ úvazku: <strong>{{ job.employment?.name || 'N/A' }}</strong></div>
-    </div>
+    </a>
 </div>
-<div v-else class="flex items-center justify-center h-64">
+<div v-else-if="loading" class="flex items-center justify-center h-64">
     <div class="text-gray-500">Načítání nabídek práce...</div>
+</div>
+<div v-else-if="error" class="text-red-500 text-center">
+    <p>{{ error }}</p>
 </div>
 </template>

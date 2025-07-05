@@ -16,8 +16,11 @@ services:
     App\:
         resource: '../src/'
         
-    GuzzleHttp\Client:
-        class: GuzzleHttp\Client
-
+    App\Service\JobsApiClient:
+        arguments:
+            $apiBaseUrl: '%env(RECRUITIS_API_BASE_URL)%'
+            $apiTimeout: '%env(int:RECRUITIS_API_TIMEOUT)%'
+            $apiToken: '%env(API_TOKEN)%'
+        
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
