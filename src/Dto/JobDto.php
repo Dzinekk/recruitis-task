@@ -16,7 +16,7 @@ class JobDto {
         public int $job_id,
         public string $title,
         public string $description,
-        public array $employment,
-        public array $addresses,
+        public array $employment = [],
+        public array $addresses = [],
     ) {}
 }

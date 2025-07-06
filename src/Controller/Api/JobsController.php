@@ -60,7 +60,7 @@ class JobsController extends AbstractController {
         return $this->handleApiCall($apiCall, $cacheKey);
     }
 
-    /**
+    /** Reply to a job offer
      * @param int $jobId
      * @param JobReplyDto $replyDto
      * @return JsonResponse
